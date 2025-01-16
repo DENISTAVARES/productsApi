@@ -1,4 +1,5 @@
 package br.com.cotiinformatica;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
@@ -16,7 +17,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -36,6 +36,7 @@ import br.com.cotiinformatica.dtos.ProdutoRequestDto;
 import br.com.cotiinformatica.dtos.ProdutoResponseDto;
 import br.com.cotiinformatica.handlers.ValidationExceptionHandler;
 import br.com.cotiinformatica.services.ProdutoService;
+
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application-test.properties")
@@ -51,11 +52,9 @@ class ProductsApiApplicationTests {
 	 * que serão utilizadas nos testes.
 	 * Este método será executado antes de cada teste.
 	 */
-	@SuppressWarnings("deprecation")
 	@BeforeEach
 	public void setUp() {
 		
-				
 		//configurando o controlador de produtos e os handlers de erros
 		mockMvc = MockMvcBuilders
 				.standaloneSetup(produtoController) //instanciando o controller
@@ -63,6 +62,7 @@ class ProductsApiApplicationTests {
 				.setControllerAdvice(new ValidationExceptionHandler()) //handler de erro
 				.build();
 	}
+
 	@Test
 	void cadastrarProdutoTest() throws Exception {	
 		
@@ -86,6 +86,7 @@ class ProductsApiApplicationTests {
 		//um objeto do tipo ProdutoResponseDto
 		when(produtoService.cadastrar(any(ProdutoRequestDto.class)))
 			.thenReturn(response);
+
 		//enviando a requisição para a API
 		mockMvc.perform(post("/api/produtos") //endpoint
 					.contentType(MediaType.APPLICATION_JSON) //formato JSON
@@ -95,6 +96,7 @@ class ProductsApiApplicationTests {
 					.andExpect(jsonPath("$.preco").value(response.getPreco())) //comparando o preço
 					.andExpect(jsonPath("$.quantidade").value(response.getQuantidade())); //comparando a quantidade
 	}
+
 	@Test
 	void atualizarProdutoTest() throws Exception {
 		
@@ -119,6 +121,7 @@ class ProductsApiApplicationTests {
 		//um objeto do tipo ProdutoResponseDto
 		when(produtoService.atualizar(eq(id), any(ProdutoRequestDto.class)))
 			.thenReturn(response);
+
 		//enviando a requisição para a API
 		mockMvc.perform(put("/api/produtos/" + id) //endpoint
 					.contentType(MediaType.APPLICATION_JSON) //formato JSON
@@ -128,6 +131,7 @@ class ProductsApiApplicationTests {
 					.andExpect(jsonPath("$.preco").value(response.getPreco())) //comparando o preço
 					.andExpect(jsonPath("$.quantidade").value(response.getQuantidade())); //comparando a quantidade		
 	}
+
 	@Test
 	void excluirProdutoTest() throws Exception {
 		
@@ -142,6 +146,7 @@ class ProductsApiApplicationTests {
 			.contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isOk());	
 	}
+
 	@Test
 	void consultarProdutosTest() throws Exception {
 		
@@ -173,13 +178,14 @@ class ProductsApiApplicationTests {
 				.param("sortBy", "id") //parametro: tipo de ordenação
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$[0].nome").value(response1.getNome()))
+				.andExpect(jsonPath("$[0].nome").value(response1.getNome())) 
 				.andExpect(jsonPath("$[0].preco").value(response1.getPreco()))
 				.andExpect(jsonPath("$[0].quantidade").value(response1.getQuantidade()))
-				.andExpect(jsonPath("$[1].nome").value(response2.getNome()))
+				.andExpect(jsonPath("$[1].nome").value(response2.getNome())) 
 				.andExpect(jsonPath("$[1].preco").value(response2.getPreco()))
-				.andExpect(jsonPath("$[1].quantidade").value(response2.getQuantidade()));
+				.andExpect(jsonPath("$[1].quantidade").value(response2.getQuantidade())); 
 	}
+
 	@Test
 	void obterProdutoPorIdTest() throws Exception {
 		
@@ -197,10 +203,8 @@ class ProductsApiApplicationTests {
 		mockMvc.perform(get("/api/produtos/" + id) //endpoint de consulta
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.nome").value(response.getNome()))
+				.andExpect(jsonPath("$.nome").value(response.getNome())) 
 				.andExpect(jsonPath("$.preco").value(response.getPreco()))
 				.andExpect(jsonPath("$.quantidade").value(response.getQuantidade()));
 	}
 }
-
-

@@ -1,6 +1,8 @@
 package br.com.cotiinformatica.configurations;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
@@ -11,6 +13,7 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 
 @Configuration
 public class SwaggerConfiguration {
+
 	 @Bean
 	    OpenAPI customOpenApi() {
 	        OpenAPI openAPI = new OpenAPI()
@@ -32,8 +35,7 @@ public class SwaggerConfiguration {
 	                                .name("MIT License")
 	                                .url("https://opensource.org/licenses/MIT")))
 	                .addSecurityItem(new SecurityRequirement().addList("bearerAuth"));
+
 	        return openAPI;
 	    }
 }
-
-

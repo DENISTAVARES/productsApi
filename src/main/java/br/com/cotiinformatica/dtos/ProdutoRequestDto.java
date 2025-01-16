@@ -1,4 +1,5 @@
 package br.com.cotiinformatica.dtos;
+
 import java.util.UUID;
 
 import jakarta.validation.constraints.Min;
@@ -7,8 +8,10 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+
 @Data
 public class ProdutoRequestDto {
+
 	@NotBlank(message = "Por favor, informe o nome do produto.")
 	@Size(min = 8, max = 150, message = "Por favor, informe o nome de 8 a 150 caracteres.")
 	private String nome;
@@ -24,6 +27,3 @@ public class ProdutoRequestDto {
 	@NotNull(message = "Por favor, informe o ID da categoria.")
 	private UUID categoriaId;
 }
-
-
-

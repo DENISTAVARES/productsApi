@@ -11,6 +11,7 @@ services:
      depends_on:
          - postgres
          - rabbitmq
+         - mongodb
      networks:
          - products-network
   postgres:
@@ -30,4 +31,19 @@ services:
        - "15672:15672"
      networks:
          - products-network
+  mongodb:
+     image: mongo:latest
+     container_name: mongodb
+     ports:
+        - "27017:27017"
+     networks:
+         - products-network
+  mailhog:
+     image: mailhog/mailhog
+     container_name: mailhog
+     ports:
+       - "1025:1025"
+       - "8025:8025"
+     networks:
+       - products-network
 

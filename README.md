@@ -68,6 +68,3 @@
 - Validação de dados na entrada de requisições.
 - Integração com RabbitMQ para processamento de eventos.
 - Tratamento padronizado de erros e respostas consistentes.
-
-
-

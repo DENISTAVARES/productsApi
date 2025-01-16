@@ -1,14 +1,19 @@
 package br.com.cotiinformatica.handlers;
+
 import java.util.ArrayList;
 import java.util.Date;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
 import br.com.cotiinformatica.dtos.ErrorResponseDto;
+
 @ControllerAdvice
 public class IllegalArgumentExceptionHandler {
+
 	@ExceptionHandler(IllegalArgumentException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ResponseBody
